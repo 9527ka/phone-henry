@@ -36,7 +36,8 @@
         "tencentcloud/sms": "^3.0",
         "alipaysdk/easysdk": "^2.2",
         "phpmailer/phpmailer": "^6.9",
-        "topthink/think-filesystem": "^2.0"
+        "topthink/think-filesystem": "^2.0",
+        "mongodb/mongodb": "^1.11"
     },
     "require-dev": {
         "symfony/var-dumper": ">=4.2",

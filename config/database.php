@@ -56,28 +56,67 @@ return [
             // 开启字段缓存
             'fields_cache'    => false,
         ],
-
-        // 更多的数据库配置信息
-        'mongo' => [
-            'type'            => 'mongo',
-            'dsn'              => env('mongodb.dsn', 'mongodb://ocean_db:dsAwhxxs5bErMyAh@127.0.0.1:27017/ocean_db'),
+        'mongo1' => [
+            'type'              => 'mongo',
             // 服务器地址
-            'hostname'        => env('mongodb.hostname', '127.0.0.1'),
+            'hostname'          => '127.0.0.1',
             // 数据库名
-            'database'        => env('mongodb.database', 'ocean_db'),
+            'database'          => 'phone_henry',
             // 用户名
-            'username'        => env('mongodb.username', 'ocean_db'),
+            'username'          => '',
             // 密码
-            'password'        => env('mongodb.password', 'dsAwhxxs5bErMyAh'),
-            // 端口
-            'hostport'        => env('mongodb.hostport', '27017'),
+            'password'          => '',
+            'hostport'          => '33857',
             // 数据库连接参数
             'params'          => [
-                // 'authSource' => env('DB_AUTHDB', 'admin'),
+                // 'authSource' => env('DB_AUTHDB', 'phone_henry'),
             ],
+            // 数据库编码默认采用utf8
             'charset'         => 'utf8',
+            // 数据库表前缀
             'prefix'          => '',
-            'debug'           => true,
+            /** 强制把_id转换为id */
+            'pk_convert_id'   => true,
+            // 数据库调试模式
+            'debug'             => env('database.debug', true),
+            // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
+            'deploy'            => 0,
+            // 数据库读写是否分离 主从式有效
+            'rw_separate'       => false,
+            // 监听SQL
+            'trigger_sql'       => true,
+            // 读写分离后 主服务器数量
+            'master_num'        => 1,
+            // 指定从服务器序号
+            'slave_no'          => '',
+            // 是否严格检查字段是否存在
+            'fields_strict'     => true,
+            // 是否需要断线重连
+            'break_reconnect'   => false,
+            // 字段缓存路径
+            'schema_cache_path' => app()->getRuntimePath() . 'schema' . DIRECTORY_SEPARATOR,
         ],
+        // 更多的数据库配置信息
+        // 'mongo' => [
+        //     'type'            => 'mongo',
+        //     'dsn'              => env('mongodb.dsn', 'mongodb://ocean_db:dsAwhxxs5bErMyAh@127.0.0.1:27017/ocean_db'),
+        //     // 服务器地址
+        //     'hostname'        => env('mongodb.hostname', '127.0.0.1'),
+        //     // 数据库名
+        //     'database'        => env('mongodb.database', 'ocean_db'),
+        //     // 用户名
+        //     'username'        => env('mongodb.username', 'ocean_db'),
+        //     // 密码
+        //     'password'        => env('mongodb.password', 'dsAwhxxs5bErMyAh'),
+        //     // 端口
+        //     'hostport'        => env('mongodb.hostport', '27017'),
+        //     // 数据库连接参数
+        //     'params'          => [
+        //         // 'authSource' => env('DB_AUTHDB', 'admin'),
+        //     ],
+        //     'charset'         => 'utf8',
+        //     'prefix'          => '',
+        //     'debug'           => true,
+        // ],
     ],
 ];

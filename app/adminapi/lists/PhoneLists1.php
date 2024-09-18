@@ -25,7 +25,7 @@ use app\common\lists\ListsExcelInterface;
  * Class PhoneLists
  * @package app\adminapi\lists
  */
-class PhoneLists extends BaseAdminDataLists implements ListsSearchInterface
+class PhoneLists extends BaseAdminDataLists implements ListsExcelInterface
 {
 
 
@@ -72,29 +72,17 @@ class PhoneLists extends BaseAdminDataLists implements ListsSearchInterface
             if(in_array('export',$v)) continue;
             if(in_array('total',$v)) continue;
             if(in_array('serverResponse',$v)) continue;
-            if(in_array('lastId',$v)) continue;
             array_push($map,$v);
         }
-        $ids = Phone::where($map)->field('id')  // 只查询主键 id 列
-        ->order('id', 'desc')  // 按 id 排序
-        ->limit($this->limitOffset, $this->limitLength)  // 偏移量和条数
-        ->select()
-        ->toArray();
-        $idList = array_column($ids, 'id');
-        $list = Phone::whereIn('id', $idList)  // 使用 IN 进行筛选
-            ->order('id', 'desc')  // 按 id 排序
+        // echo json_encode($map);die;
+        $list = Phone::where($map)
+            ->field(['id', 'phone','create_time'])
+            ->limit($this->limitOffset, $this->limitLength)
+            ->order(['create_time' => 'desc'])
             ->select()
             ->toArray();
+        // echo OceanCard::getlastsql();die;
         return $list;
-        // // echo json_encode($map);die;
-        // $list = Phone::where($map)
-        //     ->field(['id', 'phone','create_time'])
-        //     ->limit($this->limitOffset, $this->limitLength)
-        //     ->order(['create_time' => 'desc'])
-        //     ->select()
-        //     ->toArray();
-        // // echo OceanCard::getlastsql();die;
-        // return $list;
     }
 
 
@@ -135,10 +123,10 @@ class PhoneLists extends BaseAdminDataLists implements ListsSearchInterface
      * @author 段誉
      * @date 2022/11/24 16:17
      */
-    // public function setFileName(): string
-    // {
-    //     return '手机号';
-    // }
+    public function setFileName(): string
+    {
+        return '手机号';
+    }
     
     /**
      * @notes 导出字段
@@ -146,11 +134,11 @@ class PhoneLists extends BaseAdminDataLists implements ListsSearchInterface
      * @author 段誉
      * @date 2022/11/24 16:17
      */
-    // public function setExcelFields(): array
-    // {
-    //     return [
-    //         'phone' => '手机号',
-    //         'create_time' => '添加时间'
-    //     ];
-    // }
+    public function setExcelFields(): array
+    {
+        return [
+            'phone' => '手机号',
+            'create_time' => '添加时间'
+        ];
+    }
 }
